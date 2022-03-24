@@ -1,5 +1,10 @@
 .bannerContainer {
-  display: flex;
+  background-size: 6000px;
+  .bannerBox {
+    width: 980px;
+    margin: auto;
+    position: relative;
+    display: flex;
     .swiperItem {
       height: 283px;
       .swiperImg {
@@ -7,10 +12,32 @@
         height: 100%;
       }
     }
-  .bannerRight {
-    width: 254px;
-    height: 283px;
-    background: url('../../../../../../asset/download.png') no-repeat;
+    .bannerRight {
+      width: 254px;
+      height: 283px;
+      background: url('../../../../../../asset/download.png') no-repeat;
+    }
+    .btn {
+      background: url('~@/asset/banner.png') no-repeat;
+      width: 37px;
+      height: 63px;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: transparent;
+      cursor: pointer;
+      &:hover {
+        background-color: rgba(0, 0, 0, .1);
+      }
+    }
+    .btnLeft {
+      background-position: 0 -360px;
+      left: -57px;
+    }
+    .btnRight {
+      background-position: 0 -508px;
+      right: -57px;
+    }
   }
 }
 
