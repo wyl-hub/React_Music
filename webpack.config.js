@@ -16,6 +16,7 @@ module.exports = {
   },
   resolve: {
     extensions: ['.js', '.jsx'],
+    mainFiles: ['index', 'default'],
     alias: {
       "@": path.join(__dirname, './src')
     }
@@ -44,7 +45,9 @@ module.exports = {
           filename: 'imgs/[name][hash: 4][ext]'
         },
         parser: {
-          maxSize: 10 * 1024
+          dataUrlCondition: {
+            maxSize: 10 * 1024
+          }
         }
       },
       {

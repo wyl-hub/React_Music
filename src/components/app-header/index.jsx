@@ -7,22 +7,25 @@ export default memo(function Header() {
     const { pathname } = useLocation()
     return (
         <div className={styles.hederContainer}>
-            <NavLink className={styles.navLink} to="/">
+            <NavLink to="/" className={styles.logo}>
+
+            </NavLink>
+            <NavLink className={styles.navLink} to="/findmusic">
                 <span>发现音乐</span>
                 {
-                    pathname === '/' && <div className={styles.arrow}></div>
+                    pathname.split('/')[1] === 'findmusic' && <div className={styles.arrow}></div>
                 }
             </NavLink>
             <NavLink className={styles.navLink} to="/mymusic">
                 <span>我的音乐</span>
                 {
-                    pathname === '/mymusic' && <div className={styles.arrow}></div>
+                    pathname.split('/')[1] === 'mymusic' && <div className={styles.arrow}></div>
                 }
             </NavLink>
             <NavLink className={styles.navLink} to="/attention">
                 <span>关注</span>
                 {
-                    pathname === '/attention' && <div className={styles.arrow}></div>
+                    pathname.split('/')[1] === 'attention' && <div className={styles.arrow}></div>
                 }
             </NavLink>
         </div>
