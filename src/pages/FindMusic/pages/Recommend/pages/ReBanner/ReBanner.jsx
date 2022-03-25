@@ -1,10 +1,10 @@
-import React, { useEffect, useState, useRef, useCallback } from 'react'
+import React, { useEffect, useState, useRef, useCallback, memo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getBannerAction } from '../../store/actions'
 
 import { Carousel } from 'antd';
 import styles from './reBanner.module.less'
-export default function ReBanner() {
+export default memo(function ReBanner() {
 
   // banner 数据初始化
   const dispatch = useDispatch()
@@ -33,7 +33,7 @@ export default function ReBanner() {
   // 而且这个数据一般在组件加载只会请求一次
   useEffect(() => {
     if (banner.length > 0) {
-      setBgImg(banner[0].imageUrl + '?imageView&blur=40x20')
+      setBgImg(banner[0].imageUrl ? banner[0].imageUrl + '?imageView&blur=40x20' : '')
     }
   }, [banner])
 
@@ -68,4 +68,4 @@ export default function ReBanner() {
       </div>
     </div>
   )
-}
+})

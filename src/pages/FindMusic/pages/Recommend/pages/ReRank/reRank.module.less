@@ -1,0 +1,129 @@
+.main {
+    margin-top: 20px;
+    background: url('~@/asset/index_bill.png');
+    height: 472px;
+    display: flex;
+    .rankItem {
+        width: 230px;
+        .itemTop {
+            height: 120px;
+            padding-top: 20px;
+            padding-left: 19px;
+            display: flex;
+            img {
+                cursor: pointer;
+                width: 80px;
+                margin-right: 10px;
+            }
+            .tioRight {
+                padding-top: 6px;
+                font-size: 14px;
+                font-weight: 700;
+                .rankTitle {
+                    cursor: pointer;
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
+                .rightIcon {
+                    margin-top: 10px;
+                    display: flex;
+                    .play {
+                        cursor: pointer;
+                        width: 22px;
+                        height: 22px;
+                        background: url('~@/asset/index.png') no-repeat;
+                        background-position: -267px -205px;
+                        margin-right: 10px;
+                        &:hover {
+                            background-position: -267px -235px;
+                        }
+                    }
+                    .add {
+                        cursor: pointer;
+                        width: 22px;
+                        height: 22px;
+                        background: url('~@/asset/index.png') no-repeat;
+                        background-position: -300px -205px;
+                        &:hover {
+                            background-position: -300px -235px;
+                        }
+                    }
+                }
+            }
+        }
+        .itemContent {
+            padding-left: 19px;
+            .contentItem {
+                box-sizing: border-box;
+                height: 32px;
+                line-height: 32px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                &:nth-child(1), &:nth-child(2), &:nth-child(3) {
+                    .num {
+                        color: #c10d0c;
+                    }
+                }
+                .itemLeft {
+                    white-space: nowrap;
+                    flex-shrink: 1;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                    .num {
+                        font-size: 16px;
+                        margin-right: 15px;
+                    }
+                    .song {
+                        cursor: pointer;
+                        &:hover {
+                            text-decoration: underline;
+                        }
+                    }
+                }
+                .itemRight {
+                    display: flex;
+                    flex-shrink: 0;
+                    .itemIcon {
+                        cursor: pointer;
+                        width: 17px;
+                        height: 17px;
+                        margin-right: 10px;
+                        background: url('~@/asset/index.png');
+                    }
+                    .itemPlay {
+                        background-position: -267px -268px;
+                        &:hover {
+                            background-position: -267px -288px;
+                        }
+                    }
+                    .itemAdd {
+                        background: url('~@/asset/icon.png');
+                        background-position: 0 -698px;
+                        &:hover {
+                            background-position: -22px -698px;
+                        }
+                    }
+                    .itemFloder {
+                        background-position: -297px -268px;
+                        &:hover {
+                            background-position: -297px -288px;
+                        }
+                    }
+                }
+            }
+            .contentFooter {
+                text-align: right;
+                height: 32px;
+                line-height: 32px;
+                padding-right: 20px;
+                cursor: pointer;
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+}

@@ -9,6 +9,7 @@ import Rank from '../pages/FindMusic/pages/Rank/Rank'
 import SongList from '../pages/FindMusic/pages/SongList/SongList'
 import Station from '../pages/FindMusic/pages/Station/Station'
 import Singer from '../pages/FindMusic/pages/Singer/Singer'
+import Player from '../pages/Player/Player'
 
 const routes = [
     {
@@ -54,7 +55,7 @@ const routes = [
                 path: '/findmusic/Singer',
                 exact: true,
                 component: Singer
-            },
+            }
         ]
     },
     {
@@ -66,7 +67,12 @@ const routes = [
         path: '/attention',
         exact: true,
         component: Attention
-    }
+    },
+    {
+        path: '/player',
+        exact: true,
+        component: Player
+    },
 ]
 
 

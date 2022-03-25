@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { memo } from 'react'
 
-export default function NewBorn() {
+export default memo(function NewBorn() {
   return (
     <div>
       Hello NewBorn
     </div>
   )
-}
+})

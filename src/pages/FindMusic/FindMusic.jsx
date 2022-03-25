@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { NavLink, useLocation } from 'react-router-dom'
 import { renderRoutes } from 'react-router-config';
 import styles from './findMusic.module.less'
@@ -35,4 +35,4 @@ const Findmusic = (props) => {
     );
 }
 
-export default Findmusic;
+export default memo(Findmusic);

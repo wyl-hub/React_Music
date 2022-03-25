@@ -1,0 +1,63 @@
+.coverContainer {
+    width: 140px;
+    margin-bottom: 30px;
+    cursor: pointer;
+    .coverImg {
+        position: relative;
+        img {
+            width: 100%;
+        }
+        .imgFooter {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 27px;
+            padding: 0 10px;
+            background-color: rgba(0, 0, 0, .5);
+            position: absolute;
+            bottom: 0;
+            z-index: 2;
+            .footerLeft {
+                display: flex;
+                align-items: center;
+                .listenIcon {
+                    width: 14px;
+                    height: 14px;
+                    background: url('~@/asset/iconall.png') no-repeat;
+                    background-size: auto;
+                    background-position: 0 -23px;
+                    margin-right: 5px;
+                }
+                .playCount {
+                    color: #ccc;
+                }
+            }
+            .footerRight {
+                cursor: pointer;
+                width: 17px;
+                height: 17px;
+                background: url('~@/asset/iconall.png') no-repeat;
+                background-position: 0 0;
+                &:hover {
+                    background-position: 0 -60px;
+                }
+            }
+        }
+        .coverGlass {
+            background: url('~@/asset/coverall.png') no-repeat;
+            background-position: 0 0;
+            width: 140px;
+            height: 140px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+    }
+    .text {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}
