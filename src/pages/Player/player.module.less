@@ -5,4 +5,41 @@
     padding: 20px;
     background-color: #fff;
     border: 1px solid #d3d3d3;
+    .musicImg {
+        width: 203px;
+        height: 203px;
+        position: relative;
+        img {
+            position: absolute;
+            top: calc(50% - 65px);
+            left: calc(50% - 65px);
+            width:  130px;
+            height: 130px;
+        }
+        .musicBorder {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 203px;
+            height: 203px;
+            background: url('~@/asset/coverall.png') no-repeat;
+            background-position: -141px -581px;
+        }
+    }
+    .musicInfo {
+        flex: 1;
+        padding: 20px;
+        .playBtn {
+            padding: 0 20px;
+            background-color: #4291DA;
+            border: none;
+            color: white;
+            border-radius: 5px;
+            margin-top: 10px;
+            cursor: pointer;
+            &:hover {
+                background-color: #5AA0E1;
+            }
+        }
+    }
 }

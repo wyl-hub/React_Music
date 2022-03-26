@@ -35,7 +35,7 @@ const Album = () => {
         <div>
             <Theamheader title='新碟上架' />
             <div className={styles.main}>
-                <Carousel ref={swiperRef} className={styles.swiperContainer}>
+                <Carousel ref={swiperRef} dots={false} className={styles.swiperContainer}>
                     {
                         showList.map((item, index) => (
                             <div key={index} className={styles.swiperBox}>

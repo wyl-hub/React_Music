@@ -9,6 +9,7 @@ html, body {
 
 .MusicContainer {
     min-height: 100vh;
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
