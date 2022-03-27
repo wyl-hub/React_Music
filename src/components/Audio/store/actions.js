@@ -21,6 +21,20 @@ export function setCurrentSong(data) {
     }
 }
 
+export function setPlayList(data) {
+    return {
+        type: actionTypes.SET_PLAYLIST,
+        data
+    }
+}
+
+export function setPlayListMask(data) {
+    return {
+        type: actionTypes.SET_PLAYLISTMASK,
+        data
+    }
+}
+
 export function setVoice(data) {
     return {
         type: actionTypes.OPEN_VOICE,
@@ -45,9 +59,6 @@ export function addPlayList(arr) {
         } else {
             playList = arr
         }
-        dispatch({
-            type: actionTypes.ADD_PLAYLIST,
-            data: playList
-        })
+        dispatch(setPlayList(playList))
     }
 }

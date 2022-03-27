@@ -1,11 +1,13 @@
-import React, { memo, useEffect } from 'react';
+import React, { Fragment, memo, useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
+import { useHistory } from 'react-router-dom';
 import Theamheader from '@/components/TheamHeader/TheamHeader'
 import Cover from '@/components/Cover/Cover'
 import { getHotList } from '../../store/actions'
 import styles from './hotRecommend.module.less'
 
 const Hotrecommend = () => {
+    const history = useHistory()
     // 获取数据
     const { hotList } = useSelector(state => ({
         hotList: state.recommend.hotList
@@ -16,6 +18,12 @@ const Hotrecommend = () => {
     useEffect(() => {
         dispatch(getHotList())
     }, [dispatch])
+
+    // 进入歌单详情
+    const toSongDetail = (item) => {
+        history.push(`/findmusic/playlist?id=${item.id}`)
+    }
+
     return (
         <div className={styles.container}>
             <Theamheader
@@ -24,7 +32,11 @@ const Hotrecommend = () => {
             />
             <div className={styles.coverBox}>
                 {
-                    hotList.map(item => <Cover key={item.id} item={item} />)
+                    hotList.map(item => (
+                        <div key={item.id} onClick={() => toSongDetail(item)}>
+                            <Cover item={item} />
+                        </div>
+                    ))
                 }
             </div>
         </div>

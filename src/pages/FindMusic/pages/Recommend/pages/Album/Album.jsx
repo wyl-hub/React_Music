@@ -28,7 +28,6 @@ const Album = () => {
         }
         setShowList(showList)
     }, [albumList])
-
     // ref hooks
     const swiperRef = useRef()
     return (

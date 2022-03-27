@@ -1,0 +1,149 @@
+.container {
+    width: 986px;
+    height: 301px;
+    position: absolute;
+    bottom: 46px;
+    left: calc(50% - 500px);
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    .header {
+        width: 100%;
+        height: 40px;
+        background: url('~@/asset/playlist_bg.png') no-repeat;
+        background-position: 0 0;
+        display: flex;
+        .leftHeader {
+            width: 553px;
+            height: 100%;
+            padding: 0 20px 0 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: white;
+            .cleanBox {
+                display: flex;
+                align-items: center;
+                .cleanIcon {
+                    display: inline-block;
+                    background: url('~@/asset/playlist.png') no-repeat;
+                    background-position: -51px 0;
+                    width: 13px;
+                    height: 16px;
+                    cursor: pointer;
+                    margin-right: 5px;
+                    &:hover {
+                        background-position: -51px -20px;
+                    }
+                    & + div {
+                        &:hover {
+                            cursor: pointer;
+                            text-decoration: underline;
+                        }
+                    }
+                }
+            }
+        }
+        .rightHeader {
+            flex: 1;
+            text-align: center;
+            color: white;
+            line-height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            .closeIcon {
+                position: absolute;
+                right: 10px;
+                top: 50%;
+                cursor: pointer;
+                transform: translateY(-50%);
+                width: 30px;
+                height: 30px;
+                background: url('~@/asset/playlist.png') no-repeat;
+                background-position: -195px 9px;
+                &:hover {
+                    background-position: -195px -21px;
+                }
+            }
+        }
+    }
+    .content {
+        flex: 1;
+        display: flex;
+        position: relative;
+        opacity: .9;
+        .mask {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 986px;
+            height: 260px;
+            background: url('~@/asset/playlist_bg.png') no-repeat;
+            background-repeat: repeat-y;
+            background-position: -1014px 0;
+            z-index: -1;
+        }
+        .songList {
+            width: 553px;
+            .songItem {
+                display: flex;
+                color: #ccc;
+                margin-left: 2px;
+                padding: 0 20px 0 38px;
+                justify-content: space-between;
+                height: 28px;
+                align-items: center;
+                cursor: pointer;
+                background-color: rgba(0, 0, 0, .3);
+                &:hover {
+                    color: white;
+                    background-color: rgba(0, 0, 0, .7);
+                }
+                .itemLeft {
+                    display: flex;
+                    .songName {
+                        max-width: 100px;
+                        white-space: nowrap;
+                        text-overflow: ellipsis;
+                        overflow: hidden;
+                    }
+                }
+                .itemRight {
+                    display: grid;
+                    display: flex;
+                    align-items: center;
+                    .remove {
+                        background: url('~@/asset/playlist.png') no-repeat;
+                        background-position: -51px 0;
+                        width: 13px;
+                        height: 16px;
+                        cursor: pointer;
+                        margin-right: 10px;
+                        &:hover {
+                            background-position: -51px -20px;
+                        }
+                    }
+                    .singerName {
+                        width: 100px;
+                        text-overflow: ellipsis;
+                        overflow: hidden;
+                        white-space: nowrap;
+                        margin-right: 20px;
+                    }
+                    .linkIcon {
+                        margin-left: 20px;
+                        width: 14px;
+                        height: 16px;
+                        background: url('~@/asset/playlist.png') no-repeat;
+                        background-position: -80px 0;
+                        &:hover {
+                            background-position: -80px -20px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

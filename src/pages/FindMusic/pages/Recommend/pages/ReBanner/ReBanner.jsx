@@ -26,7 +26,7 @@ export default memo(function ReBanner() {
 
   // 每次轮播图改变之后 更改container背景图
   const bannerChange = useCallback((from, to) => {
-    setBgImg(banner[to].imageUrl + '?imageView&blur=40x20')
+    setBgImg(banner[to] ? banner[to].imageUrl + '?imageView&blur=40x20' : '')
   }, [banner])
 
   // 因为第一次可能数据还没请求过来  所有需要依赖这个数据的改变做初始化   

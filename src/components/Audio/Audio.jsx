@@ -1,9 +1,10 @@
 import React, { memo, useRef, useEffect, useState, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAudioDom, setVoice } from './store/actions'
-import { playMusic, pauseMusic } from './hooks/common';
+import { getAudioDom, setVoice, setPlayListMask } from './store/actions'
+import { playMusic, pauseMusic, changeMusic } from './hooks/common';
 import { Slider } from 'antd'
 import dayjs from 'dayjs'
+import Currentlist from './pages/CurrentList/CurrentList'
 import styles from './audio.module.less'
 
 const Audio = () => {
@@ -14,12 +15,13 @@ const Audio = () => {
         dispatch(getAudioDom(audioRef))
     }, [dispatch, audioRef])
 
-    // 获取播放状态 播放列表 当前播放歌曲 音量调节面板
-    const { isPlay, playList, currentSong, voiceFlag } = useSelector(state => ({
+    // 获取播放状态 播放列表 当前播放歌曲 音量调节面板 播放列表操作面板
+    const { isPlay, playList, currentSong, voiceFlag, playListMask } = useSelector(state => ({
         isPlay: state.audio.isPlay,
         playList: state.audio.playList,
         currentSong: state.audio.currentSong,
-        voiceFlag: state.audio.voiceFlag
+        voiceFlag: state.audio.voiceFlag,
+        playListMask: state.audio.playListMask
     }))
 
     // 获取当前播放时间 slider上面显示的时间
@@ -67,26 +69,29 @@ const Audio = () => {
     const playBtn = playMusic(dispatch, audioRef, currentSong)
     // 暂停按钮事件
     const pauseBtn = pauseMusic(dispatch, audioRef, currentSong)
-
+    
+    // 上一首 下一首
+    const lastMusic = useCallback(changeMusic(dispatch, audioRef, playList, currentSong, 'last'), [dispatch, audioRef, playList, currentSong])
+    const nextMusic = useCallback(changeMusic(dispatch, audioRef, playList, currentSong, 'next'), [dispatch, audioRef, playList, currentSong])
     return (
         <div className={styles.audioContainer}>
             <div className={styles.audioMain}>
                 {/* 上一首 下一首 播放 */}
                 <div className={styles.playOpt}>
-                    <div className={`${styles.playIcon} ${styles.prev}`}></div>
+                    <div onClick={lastMusic} className={`${styles.playIcon} ${styles.prev}`}></div>
                     {
                         isPlay ?
                             <div onClick={pauseBtn} className={`${styles.playIcon} ${styles.pause}`}></div>
                             :
                             <div onClick={playBtn} className={`${styles.playIcon} ${styles.play}`}></div>
                     }
-                    <div className={`${styles.playIcon} ${styles.next}`}></div>
+                    <div onClick={nextMusic} className={`${styles.playIcon} ${styles.next}`}></div>
                 </div>
                 {/* 音乐信息 */}
                 <div className={styles.musicInfo}>
                     {/* 音乐图片 */}
                     <div className={styles.musicImg}>
-                        <img src={currentSong.al && currentSong.al.picUrl} />
+                        <img src={currentSong.al && currentSong.al.picUrl + '?param=34y34'} />
                     </div>
                     {/* 音乐时长 基本信息 */}
                     <div className={styles.musicContent}>
@@ -122,13 +127,17 @@ const Audio = () => {
                             </div>
                         }
                     </div>
-                    <div className={styles.list}></div>
+                    <div onClick={() => dispatch(setPlayListMask(!playListMask))} className={styles.list}></div>
                 </div>
             </div>
             {/* lock */}
             <div className={styles.lock}>
                 <div className={styles.lockIcon}></div>
             </div>
+            {/* 播放列表 */}
+            {
+                playListMask && <Currentlist audioRef={audioRef} playList={playList} currentSong={currentSong} />
+            }
             {/* 隐藏的audio */}
             <audio ref={audioRef} onTimeUpdate={getCurrentTime} />
         </div>

@@ -36,13 +36,8 @@ const Rerank = () => {
     // 进入歌曲详情
     const enterDetail = useCallback((index, ind) => {
         const aim = rankList[index].playlist.tracks[ind]
-        history.push({
-            pathname: '/player',
-            state: {
-                id: 1
-            }
-        })
-    })
+        history.push(`/findmusic/player?id=${aim.id}`)
+    }, [rankList])
 
     return (
         <div>
