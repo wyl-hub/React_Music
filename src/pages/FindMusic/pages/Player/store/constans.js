@@ -1,1 +1,2 @@
 export const GET_SONGDETAIL = 'GET_SONGDETAIL'
+export const GET_LYRIC = 'GET_LYRIC'

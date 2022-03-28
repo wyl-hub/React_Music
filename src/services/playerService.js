@@ -7,3 +7,6 @@ export const getSongDetail = async (ids) => {
 
 // 歌词数据
 // /lyric?id
+export const getSongLyric = id => {
+  return get(`/lyric?id=${id}`)
+}

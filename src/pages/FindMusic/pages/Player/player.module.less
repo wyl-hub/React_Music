@@ -41,5 +41,22 @@
                 background-color: #5AA0E1;
             }
         }
+        .lyricBox {
+            margin-top: 20px;
+            width: 240px;
+            border: 1px solid #ccc;
+            padding: 10px 20px;
+            .lyricContainer {
+                width: 200px;
+                height: 100px;
+                overflow-y: scroll;
+                & > div {
+                    height: 500px !important;
+                    .slick-active {
+                        color: red !important;
+                    }
+                }
+            }
+        }
     }
 }

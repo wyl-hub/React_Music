@@ -9,7 +9,9 @@ const initState = {
     // 音量调节
     voiceFlag: false,
     // 播放列表面板
-    playListMask: false
+    playListMask: false,
+    // 当前播放歌词
+    currentLyc: []
 }
 
 export default function (state = initState, action) {
@@ -26,6 +28,8 @@ export default function (state = initState, action) {
             return { ...state, playList: action.data }
         case actionTypes.SET_PLAYLISTMASK:
             return { ...state, playListMask: action.data }
+        case actionTypes.GET_CURRENTLYC:
+            return { ...state, currentLyc: action.data }
         default:
             return state
     }

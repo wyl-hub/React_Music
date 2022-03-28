@@ -15,13 +15,14 @@ const Audio = () => {
         dispatch(getAudioDom(audioRef))
     }, [dispatch, audioRef])
 
-    // 获取播放状态 播放列表 当前播放歌曲 音量调节面板 播放列表操作面板
-    const { isPlay, playList, currentSong, voiceFlag, playListMask } = useSelector(state => ({
+    // 获取播放状态 播放列表 当前播放歌曲 音量调节面板 播放列表操作面板 当前歌词
+    const { isPlay, playList, currentSong, voiceFlag, playListMask, currentLyc } = useSelector(state => ({
         isPlay: state.audio.isPlay,
         playList: state.audio.playList,
         currentSong: state.audio.currentSong,
         voiceFlag: state.audio.voiceFlag,
-        playListMask: state.audio.playListMask
+        playListMask: state.audio.playListMask,
+        currentLyc: state.audio.currentLyc
     }))
 
     // 获取当前播放时间 slider上面显示的时间
@@ -69,10 +70,12 @@ const Audio = () => {
     const playBtn = playMusic(dispatch, audioRef, currentSong)
     // 暂停按钮事件
     const pauseBtn = pauseMusic(dispatch, audioRef, currentSong)
-    
+
     // 上一首 下一首
     const lastMusic = useCallback(changeMusic(dispatch, audioRef, playList, currentSong, 'last'), [dispatch, audioRef, playList, currentSong])
     const nextMusic = useCallback(changeMusic(dispatch, audioRef, playList, currentSong, 'next'), [dispatch, audioRef, playList, currentSong])
+
+    // console.log(currentLyc)
     return (
         <div className={styles.audioContainer}>
             <div className={styles.audioMain}>
@@ -136,7 +139,13 @@ const Audio = () => {
             </div>
             {/* 播放列表 */}
             {
-                playListMask && <Currentlist audioRef={audioRef} playList={playList} currentSong={currentSong} />
+                playListMask && <Currentlist
+                    isPlay={isPlay}
+                    audioRef={audioRef}
+                    playList={playList}
+                    currentSong={currentSong}
+                    currentLyc={currentLyc}
+                />
             }
             {/* 隐藏的audio */}
             <audio ref={audioRef} onTimeUpdate={getCurrentTime} />

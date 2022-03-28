@@ -1,5 +1,6 @@
-import React, { memo, useState, useCallback } from 'react';
+import React, { memo, useState, useEffect, useCallback, useRef } from 'react';
 import dayjs from 'dayjs'
+import { Carousel } from 'antd';
 import { useDispatch } from 'react-redux';
 import { useHistory, useLocation } from 'react-router';
 import { playNewMusic, removeMusic } from '../../hooks/common'
@@ -7,7 +8,7 @@ import styles from './currentList.module.less'
 
 
 const Currentlist = (props) => {
-    const { playList, currentSong, audioRef } = props
+    const { playList, currentSong, audioRef, currentLyc, isPlay } = props
     const history = useHistory()
     const location = useLocation()
     const dispatch = useDispatch()
@@ -32,6 +33,51 @@ const Currentlist = (props) => {
         } else {
             history.push(`/findmusic/player?id=${id}`)
         }
+    }
+
+    // 计算歌词滚动
+    const [curScroInd, setScroInd] = useState(false)
+    const swiperDom = useRef()
+    useEffect(() => {
+        let timr = null
+        if (isPlay) {
+            timr = setInterval(() => {
+                lycScroll(timr)
+            }, 100);
+        }
+        return () => {
+            clearInterval(timr)
+        }
+    }, [curScroInd, isPlay, currentLyc, swiperDom])
+
+    const lycScroll = (timr) => {
+        if (!isPlay) {
+            clearInterval(timr)
+            return
+        }
+        const currentTime = audioRef.current.currentTime * 1000
+        currentLyc.some((item, index) => {
+            if (currentTime < item.time) {
+                if (index === 0) {
+                    if (curScroInd !== 0) {
+                        setScroInd(0)
+                        swiperDom.current.goTo(0, false)
+                    }
+                }
+                else {
+                    if (curScroInd !== index - 1) {
+                        setScroInd(index - 1)
+                        swiperDom.current.goTo(index - 1)
+                    }
+                }
+                return true
+            } else if (index === currentLyc.length - 1) {
+                if (curScroInd !== currentLyc.length - 1) {
+                    setScroInd(currentLyc.length - 1)
+                    swiperDom.current.goTo(currentLyc.length - 1)
+                }
+            }
+        })
     }
     return (
         <div className={styles.container}>
@@ -88,6 +134,23 @@ const Currentlist = (props) => {
                     }
                 </div>
                 {/* 歌词 */}
+                <div className={styles.lycContainer}>
+                    <Carousel
+                        ref={swiperDom}
+                        className={styles.lycSwiper}
+                        dotPosition={'left'}
+                        dots={false}
+                        autoplay={false}
+                    >
+                        {
+                            currentLyc.map((item, index) => (
+                                <div key={item.time} className={styles.swiperItem}>
+                                    <span style={{ color: curScroInd === index && 'red' }}>{item.content}</span>
+                                </div>
+                            ))
+                        }
+                    </Carousel>
+                </div>
             </div>
         </div>
     );

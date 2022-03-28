@@ -1,4 +1,7 @@
-import { changePlayStatus, setCurrentSong, addPlayList, setPlayList } from '../store/actions'
+import { changePlayStatus, setCurrentSong, addPlayList, setPlayList, getCurrentLyc } from '../store/actions'
+import { formatLyc } from '@/utils/format'
+import * as playerService from '@/services/playerService'
+
 // 播放音乐
 export const playMusic = (dispatch, audioDom, currentSong) => {
     return () => {
@@ -17,6 +20,16 @@ export const pauseMusic = (dispatch, audioDom, currentSong) => {
     }
 }
 
+// 获取当前播放歌曲的歌词
+export const getCurrentLrc = (dispatch, id) => {
+    playerService.getSongLyric(id).then(res => {
+        const lrc = res.data.lrc.lyric
+        const arr = lrc.split('\n')
+        const lyricList = formatLyc(arr)
+        dispatch(getCurrentLyc(lyricList))
+    })
+}
+
 // 传入新歌曲资源并播放
 export const playNewMusic = (dispatch, audioDom, newSong) => {
     return () => {
@@ -26,6 +39,7 @@ export const playNewMusic = (dispatch, audioDom, newSong) => {
         audioDom.current.src = url
         audioDom.current.load()
         audioDom.current.play()
+        getCurrentLrc(dispatch, newSong.id)
         dispatch(changePlayStatus(true))
         dispatch(setCurrentSong(newSong))
     }

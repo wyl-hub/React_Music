@@ -1,5 +1,12 @@
 import * as actionTypes from './constans'
 
+export function getCurrentLyc(data) {
+    return {
+        type: actionTypes.GET_CURRENTLYC,
+        data
+    }
+}
+
 export function getAudioDom(dom) {
     return {
         type: actionTypes.GET_AUDIODOM,
