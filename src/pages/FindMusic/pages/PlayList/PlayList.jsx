@@ -3,6 +3,7 @@ import { useLocation, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux'
 import { getListDetail } from './store/actions'
 import { changePlayStatus, setCurrentSong, addPlayList } from '@/components/Audio/store/actions'
+import { playNewMusic } from '@/components/Audio/hooks/common'
 import dayjs from 'dayjs'
 import styles from './playList.module.less'
 
@@ -32,18 +33,9 @@ const Playlist = () => {
     // 播放音乐
     const playMusic = useCallback((index) => {
         const item = songList[index]
-        // 获取音频资源 播放音乐  且改变audio播放状态
-        const url = `https://music.163.com/song/media/outer/url?id=${item.id}.mp3`
-        audioRef.current.src = url
-        audioRef.current.load()
-        audioRef.current.play()
-        // 改变播放状态
-        dispatch(changePlayStatus(true))
-        // 设置当前播放歌曲
-        dispatch(setCurrentSong(item))
-        // 加入播放队列
-        dispatch(addPlayList([item]))
+        playNewMusic(dispatch, audioRef, item)()
     }, [songList])
+
 
     // to 音乐详情
     const history = useHistory()
