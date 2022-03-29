@@ -4,8 +4,11 @@ import styles from './newBron.module.less'
 
 const Newbron = (props) => {
     const { son } = props
+    const toDetail = () => {
+        console.log(son)
+    }
     return (
-        <div className={styles.box}>
+        <div onClick={toDetail} className={styles.box}>
             <img src={son.blurPicUrl + '?param=100y100'} />
             <div className={styles.bgImg}></div>
             <div className={styles.text}>{son.name}</div>

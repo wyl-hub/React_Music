@@ -18,7 +18,7 @@ export function getListDetail(id) {
     }
 }
 
-function getSongList(arr, dispatch) {
+export function getSongList(arr, dispatch) {
     let songList = []
     const promiseArr = arr.map(item => playerService.getSongDetail(item.id))
     Promise.all(promiseArr).then(res => {

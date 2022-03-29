@@ -37,6 +37,7 @@ const Currentlist = (props) => {
 
     // 计算歌词滚动
     const [curScroInd, setScroInd] = useState(false)
+    // 歌词容器dom
     const swiperDom = useRef()
     useEffect(() => {
         let timr = null
@@ -48,8 +49,9 @@ const Currentlist = (props) => {
         return () => {
             clearInterval(timr)
         }
-    }, [curScroInd, isPlay, currentLyc, swiperDom])
+    }, [audioRef, curScroInd, isPlay, currentLyc, swiperDom])
 
+    // 获取当前歌词
     const lycScroll = (timr) => {
         if (!isPlay) {
             clearInterval(timr)
@@ -59,25 +61,23 @@ const Currentlist = (props) => {
         currentLyc.some((item, index) => {
             if (currentTime < item.time) {
                 if (index === 0) {
-                    if (curScroInd !== 0) {
-                        setScroInd(0)
-                        swiperDom.current.goTo(0, false)
-                    }
+                    if (curScroInd !== 0) containerScroll(swiperDom, 0)
                 }
                 else {
-                    if (curScroInd !== index - 1) {
-                        setScroInd(index - 1)
-                        swiperDom.current.goTo(index - 1)
-                    }
+                    if (curScroInd !== index - 1) containerScroll(swiperDom, index - 1)
                 }
                 return true
             } else if (index === currentLyc.length - 1) {
-                if (curScroInd !== currentLyc.length - 1) {
-                    setScroInd(currentLyc.length - 1)
-                    swiperDom.current.goTo(currentLyc.length - 1)
-                }
+                if (curScroInd !== currentLyc.length - 1) containerScroll(swiperDom, currentLyc.length - 1)
             }
         })
+    }
+
+    // 歌词容器滚动
+    const containerScroll = (swiperDom, index) => {
+        setScroInd(index)
+        if (index >= 4) swiperDom.current.scrollTop = (index - 3) * 37
+        if (index < 4) swiperDom.current.scrollTop = 0
     }
     return (
         <div className={styles.container}>
@@ -134,22 +134,18 @@ const Currentlist = (props) => {
                     }
                 </div>
                 {/* 歌词 */}
-                <div className={styles.lycContainer}>
-                    <Carousel
-                        ref={swiperDom}
-                        className={styles.lycSwiper}
-                        dotPosition={'left'}
-                        dots={false}
-                        autoplay={false}
-                    >
-                        {
-                            currentLyc.map((item, index) => (
-                                <div key={item.time} className={styles.swiperItem}>
-                                    <span style={{ color: curScroInd === index && 'red' }}>{item.content}</span>
-                                </div>
-                            ))
-                        }
-                    </Carousel>
+                <div ref={swiperDom} className={`${styles.lycContainer}`}>
+                    {
+                        currentLyc.map((item, index) => (
+                            <p
+                                style={curScroInd === index ? { color: 'white' } : {}}
+                                className={`${styles.lycItem}`}
+                                key={item.time + index}
+                            >
+                                {item.content}
+                            </p>
+                        ))
+                    }
                 </div>
             </div>
         </div>

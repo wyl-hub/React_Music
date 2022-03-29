@@ -6,6 +6,7 @@ import { setPlayListMask, setVoice } from '@/components/Audio/store/actions'
 import Header from '../app-header/index'
 import Footer from '../app-footer/index'
 import Audio from '../Audio/Audio'
+import styles from './main.module.less'
 
 const Main = () => {
     const dispatch = useDispatch()
@@ -21,6 +22,9 @@ const Main = () => {
             </div>
             <Footer />
             <Audio />
+            {/* <div className={styles.mask}>
+                <Spin className={styles.loading} size='large' tip="Loading" />
+            </div> */}
         </div>
     );
 }

@@ -62,6 +62,13 @@ export function addPlayList(arr) {
                         playList.push(arr[0])
                     }
                 })
+            } else if (arr.length > 1) {
+                arr.some((item, ind) => {
+                    playList.some((son, index) => {
+                        if (son.id === item.id) return true
+                        else if (index === playList.length - 1) playList.push(item)
+                    })
+                })
             }
         } else {
             playList = arr

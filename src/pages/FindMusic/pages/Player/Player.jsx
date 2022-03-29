@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useState } from 'react';
+import React, { memo, useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Carousel } from 'antd';
 import { useLocation } from 'react-router-dom';
@@ -33,6 +33,11 @@ const Player = () => {
         audioRef: state.audio.audioRef
     }))
 
+    // 展开 收起歌词
+    const [showFlag, setFlag] = useState(false)
+    const changFlag = useCallback(() => {
+        setFlag(!showFlag)
+    }, [showFlag])
     return (
         <div className={styles.container}>
             <div className={styles.musicImg}>
@@ -44,11 +49,12 @@ const Player = () => {
                 <div>歌手：{songDetail.ar && songDetail.ar[0].name}</div>
                 <button onClick={playNewMusic(dispatch, audioRef, songDetail)} className={styles.playBtn}>播放</button>
                 {/* 歌词 */}
-                <div className={styles.lyricBox}>
-                    {/* {
-                        lrc.map(item => <div>{item.content} </div>)
-                    } */}
+                <div style={{height: showFlag ? 'fit-content' : '300px'}} className={styles.lyricBox}>
+                    {
+                        lrc.map((item, index) => <div key={item.time + index}>{item.content} </div>)
+                    }
                 </div>
+                <span onClick={changFlag} className={styles.showAll}>{showFlag ? '收起' : '展开'}</span>
             </div>
         </div>
     );

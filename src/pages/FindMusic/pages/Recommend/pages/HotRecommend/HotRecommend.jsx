@@ -28,7 +28,7 @@ const Hotrecommend = () => {
         <div className={styles.container}>
             <Theamheader
                 title={'热门推荐'}
-                keywordList={['华语', '流行', '摇滚', '民谣', '电子']}
+                // keywordList={['华语', '流行', '摇滚', '民谣', '电子']}
             />
             <div className={styles.coverBox}>
                 {

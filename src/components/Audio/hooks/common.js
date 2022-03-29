@@ -31,17 +31,26 @@ export const getCurrentLrc = (dispatch, id) => {
 }
 
 // 传入新歌曲资源并播放
-export const playNewMusic = (dispatch, audioDom, newSong) => {
+export const playNewMusic = (dispatch, audioDom, newSong, songList = []) => {
     return () => {
         if (JSON.stringify(newSong) === '{}') return
-        const url = `https://music.163.com/song/media/outer/url?id=${newSong.id}.mp3`
-        if (url !== audioDom.current.src) dispatch(addPlayList([newSong]))
+        let url = ''
+        if (songList.length > 0) url = `https://music.163.com/song/media/outer/url?id=${songList[0].id}.mp3`
+        else url = `https://music.163.com/song/media/outer/url?id=${newSong.id}.mp3`
         audioDom.current.src = url
         audioDom.current.load()
         audioDom.current.play()
-        getCurrentLrc(dispatch, newSong.id)
         dispatch(changePlayStatus(true))
-        dispatch(setCurrentSong(newSong))
+
+        if (songList.length > 0) {
+            dispatch(addPlayList(songList))
+            getCurrentLrc(dispatch, songList[0].id)
+            dispatch(setCurrentSong(songList[0]))
+        } else {
+            dispatch(addPlayList([newSong]))
+            getCurrentLrc(dispatch, newSong.id)
+            dispatch(setCurrentSong(newSong))
+        }
     }
 }
 

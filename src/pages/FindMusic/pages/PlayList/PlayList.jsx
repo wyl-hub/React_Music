@@ -2,7 +2,6 @@ import React, { memo, useEffect, useCallback } from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux'
 import { getListDetail } from './store/actions'
-import { changePlayStatus, setCurrentSong, addPlayList } from '@/components/Audio/store/actions'
 import { playNewMusic } from '@/components/Audio/hooks/common'
 import dayjs from 'dayjs'
 import styles from './playList.module.less'
@@ -29,12 +28,16 @@ const Playlist = () => {
         if (id) dispatch(getListDetail(id))
     }, [dispatch])
 
+    // 播放该歌单
+    const playSongList = useCallback(() => {
+        playNewMusic(dispatch, audioRef, null, songList)()
+    }, [dispatch, audioRef, songList])
 
     // 播放音乐
     const playMusic = useCallback((index) => {
         const item = songList[index]
         playNewMusic(dispatch, audioRef, item)()
-    }, [songList])
+    }, [dispatch, songList, audioRef])
 
 
     // to 音乐详情
@@ -47,12 +50,12 @@ const Playlist = () => {
             {/* 歌单详情 */}
             <div className={styles.info}>
                 <div className={styles.infoLeft}>
-                    <img src={playlist.coverImgUrl} />
+                    <img src={playlist.coverImgUrl + '?param=200y200'} />
                 </div>
                 <div className={styles.infoRight}>
                     {/* 歌单名称 */}
                     <h2>{playlist.name}</h2>
-                    <button className={styles.playBtn}>播放</button>
+                    <button onClick={playSongList} className={styles.playBtn}>播放</button>
                     <div className={styles.description}>
                         <p>介绍：</p>
                         <div>{playlist.description}</div>
