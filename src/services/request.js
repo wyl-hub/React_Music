@@ -13,11 +13,16 @@ axios.interceptors.request.use(config => {
 })
 
 axios.interceptors.response.use(response => {
-  // console.log('请求成功', response)
+  // console.log('请求成功')
   // 请求成功之后的一些操作
   return response
 }, err => {
   console.log('请求失败')
+  if (err.response.data.message === "登录后才可查看") {
+    alert('自动登陆中···')
+    localStorage.removeItem('token')
+    window.location.href = '/'
+  }
 })
 
 export const get = (url, data) => {

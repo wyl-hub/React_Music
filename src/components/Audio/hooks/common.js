@@ -39,7 +39,9 @@ export const playNewMusic = (dispatch, audioDom, newSong, songList = []) => {
         else url = `https://music.163.com/song/media/outer/url?id=${newSong.id}.mp3`
         audioDom.current.src = url
         audioDom.current.load()
-        audioDom.current.play()
+        setTimeout(() => {
+            audioDom.current.play()
+        }, 300)
         dispatch(changePlayStatus(true))
 
         if (songList.length > 0) {

@@ -1,11 +1,12 @@
 import React, { memo } from 'react';
-
+import { useHistory } from 'react-router-dom'
 import styles from './newBron.module.less'
 
 const Newbron = (props) => {
+    const history = useHistory()
     const { son } = props
     const toDetail = () => {
-        console.log(son)
+        history.push(`/findmusic/album?id=${son.id}`)
     }
     return (
         <div onClick={toDetail} className={styles.box}>

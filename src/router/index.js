@@ -11,6 +11,7 @@ import Station from '../pages/FindMusic/pages/Station/Station'
 import Singer from '../pages/FindMusic/pages/Singer/Singer'
 import Player from '../pages/FindMusic/pages/Player/Player'
 import PlayList from '../pages/FindMusic/pages/PlayList/PlayList'
+import Album from '../pages/FindMusic/pages/Album/Album'
 
 const routes = [
     {
@@ -64,6 +65,10 @@ const routes = [
             {
                 path: '/findmusic/playlist',
                 component: PlayList
+            },
+            {
+                path: '/findmusic/album',
+                component: Album
             }
         ]
     },

@@ -9,6 +9,7 @@ import './index.css'
 
 export default function App() {
   useEffect(() => {
+    console.log(1)
     login()
   }, [])
   
