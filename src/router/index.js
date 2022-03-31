@@ -4,7 +4,7 @@ import FindMusic from '../pages/FindMusic/FindMusic'
 import MyMusic from '../pages/Mymusic/Mymusic'
 import Attention from "@/pages/Attention/Attention"
 import Recommend from '../pages/FindMusic/pages/Recommend/Recommend'
-import NewBorn from '../pages/FindMusic/pages/NewBorn/NewBorn'
+import AlbumList from '../pages/FindMusic/pages/AlbumList/AlbumList'
 import Rank from '../pages/FindMusic/pages/Rank/Rank'
 import SongList from '../pages/FindMusic/pages/SongList/SongList'
 import Station from '../pages/FindMusic/pages/Station/Station'
@@ -39,9 +39,9 @@ const routes = [
                 component: Rank
             },
             {
-                path: '/findmusic/NewBorn',
+                path: '/findmusic/AlbumList',
                 exact: true,
-                component: NewBorn
+                component: AlbumList
             },
             {
                 path: '/findmusic/SongList',

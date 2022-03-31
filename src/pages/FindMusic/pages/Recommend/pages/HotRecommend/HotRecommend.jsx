@@ -7,7 +7,6 @@ import { getHotList } from '../../store/actions'
 import styles from './hotRecommend.module.less'
 
 const Hotrecommend = () => {
-    const history = useHistory()
     // 获取数据
     const { hotList } = useSelector(state => ({
         hotList: state.recommend.hotList
@@ -19,21 +18,19 @@ const Hotrecommend = () => {
         dispatch(getHotList())
     }, [dispatch])
 
-    // 进入歌单详情
-    const toSongDetail = (item) => {
-        history.push(`/findmusic/playlist?id=${item.id}`)
-    }
+    
 
     return (
         <div className={styles.container}>
             <Theamheader
                 title={'热门推荐'}
+                titlePath={'/findmusic/SongList'}
                 // keywordList={['华语', '流行', '摇滚', '民谣', '电子']}
             />
             <div className={styles.coverBox}>
                 {
                     hotList.map(item => (
-                        <div key={item.id} onClick={() => toSongDetail(item)}>
+                        <div key={item.id} >
                             <Cover item={item} />
                         </div>
                     ))

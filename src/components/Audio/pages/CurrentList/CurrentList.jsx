@@ -3,6 +3,7 @@ import dayjs from 'dayjs'
 import { Carousel } from 'antd';
 import { useDispatch } from 'react-redux';
 import { useHistory, useLocation } from 'react-router';
+import { setPlayList } from '../../store/actions'
 import { playNewMusic, removeMusic } from '../../hooks/common'
 import styles from './currentList.module.less'
 
@@ -73,6 +74,11 @@ const Currentlist = (props) => {
         })
     }
 
+    // 清空播放列表
+    const cleanPlayList = () => {
+        dispatch(setPlayList([]))
+    }
+
     // 歌词容器滚动
     const containerScroll = (swiperDom, index) => {
         setScroInd(index)
@@ -85,7 +91,7 @@ const Currentlist = (props) => {
                 {/* 左侧播放列表头部 */}
                 <div className={styles.leftHeader}>
                     <div>播放列表</div>
-                    <div className={styles.cleanBox}>
+                    <div onClick={cleanPlayList} className={styles.cleanBox}>
                         <div className={styles.cleanIcon}></div>
                         <div>清除</div>
                     </div>

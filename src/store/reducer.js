@@ -5,13 +5,17 @@ import player from "../pages/FindMusic/pages/Player/store";
 import audio from '../components/Audio/store'
 import playerlist from '../pages/FindMusic/pages/PlayList/store'
 import album from '../pages/FindMusic/pages/Album/store'
+import songlist from '../pages/FindMusic/pages/SongList/store'
+import albumlist from '../pages/FindMusic/pages/AlbumList/store'
 
 const reducer = combineReducers({
   recommend,
   player,
   audio,
   playerlist,
-  album
+  album,
+  songlist,
+  albumlist
 })
 
 export default reducer

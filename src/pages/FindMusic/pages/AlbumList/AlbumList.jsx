@@ -1,35 +1,34 @@
 import React, { memo, useEffect, useCallback } from 'react'
 import { Pagination } from 'antd';
 import { useDispatch, useSelector } from 'react-redux'
-import { getSongListByPageAction } from './store/actions'
+import { getAlbumByPageAction } from './store/actions'
 import TheamHeader from '@/components/TheamHeader/TheamHeader'
-import Cover from '@/components/Cover/Cover'
-import styles from './songList.module.less'
-
-export default memo(function SongList() {
+import Newbron from '@/components/NewBron/NewBron'
+import styles from './albumlist.module.less'
+export default memo(function AlbumList() {
   const dispatch = useDispatch()
   useEffect(() => {
-    dispatch(getSongListByPageAction(0))
+    dispatch(getAlbumByPageAction(0))
   }, [dispatch])
   // 获取当前页数据
 
   const { currentInfo } = useSelector(state => ({
-    currentInfo: state.songlist.currentInfo
+    currentInfo: state.albumlist.currentInfo
   }))
-  const { playlists = [], total } = currentInfo
+
+  const { albums = [], total = 0 } = currentInfo
 
   const pageChange = useCallback((e) => {
-    dispatch(getSongListByPageAction((e - 1) * 35))
+    dispatch(getAlbumByPageAction((e - 1) * 35))
   })
-
   return (
     <div className={styles.container}>
       <TheamHeader title={'最热'} />
       <div className={styles.songlistBox}>
         {
-          playlists.map(item => (
+          albums.map(item => (
             <div key={item.id}>
-              <Cover item={item} />
+              <Newbron son={item} />
             </div>
           ))
         }

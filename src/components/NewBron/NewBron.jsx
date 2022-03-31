@@ -2,7 +2,7 @@ import React, { memo } from 'react';
 import { useHistory } from 'react-router-dom'
 import styles from './newBron.module.less'
 
-const Newbron = (props) => {
+const NewBron = (props) => {
     const history = useHistory()
     const { son } = props
     const toDetail = () => {
@@ -18,4 +18,4 @@ const Newbron = (props) => {
     );
 }
 
-export default memo(Newbron);
+export default memo(NewBron);

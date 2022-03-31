@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Carousel } from 'antd';
 import { getAlbum } from '../../store/actions'
 import Theamheader from '@/components/TheamHeader/TheamHeader'
-import Newbron from '@/components/Newbron/Newbron'
+import Newbron from '@/components/NewBron/NewBron'
 import styles from './album.module.less'
 
 const Album = () => {
@@ -32,7 +32,7 @@ const Album = () => {
     const swiperRef = useRef()
     return (
         <div>
-            <Theamheader title='新碟上架' />
+            <Theamheader title='新碟上架' titlePath={'/findmusic/AlbumList'} />
             <div className={styles.main}>
                 <Carousel ref={swiperRef} dots={false} className={styles.swiperContainer}>
                     {

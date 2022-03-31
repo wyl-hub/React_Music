@@ -1,6 +1,6 @@
 import React, { memo, useRef, useEffect, useState, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAudioDom, setVoice, setPlayListMask } from './store/actions'
+import { getAudioDom, setVoice, setPlayListMask, changePlayStatus } from './store/actions'
 import { playMusic, pauseMusic, changeMusic } from './hooks/common';
 import { Slider } from 'antd'
 import dayjs from 'dayjs'
@@ -28,9 +28,19 @@ const Audio = () => {
     // 获取当前播放时间 slider上面显示的时间
     const [currentTime, setTime] = useState(0)
     const [temTime, setTemTime] = useState(false)
-    const getCurrentTime = (e) => {
+    const getCurrentTime = useCallback((e) => {
         setTime(e.target.currentTime * 1000)
-    }
+        if (currentSong.dt) {
+            if (e.target.currentTime * 1000 >= currentSong.dt) {
+                if (playList.length === 0) {
+                    dispatch(changePlayStatus(false))
+                    audioRef.current.pause()
+                } else {
+                    changeMusic(dispatch, audioRef, playList, currentSong, 'next')()
+                }
+            }
+        }
+    }, [setTime, dispatch, currentSong, playList, audioRef, nextMusic])
     // console.log('播放列表', playList)
     // console.log('当前播放音乐', currentSong)
     const duration = (currentSong.dt && dayjs(currentSong.dt).format('mm:ss')) || '00:00'

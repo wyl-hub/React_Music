@@ -1,5 +1,6 @@
 import React, { memo, useCallback, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useHistory } from 'react-router';
 import { formatCount } from '@/utils/format'
 import { playNewMusic } from '@/components/Audio/hooks/common'
 import * as playlistService from '@/services/playlistService'
@@ -8,11 +9,17 @@ import { Spin } from 'antd'
 import styles from './cover.module.less'
 
 const Cover = (props) => {
+    const history = useHistory()
     const dispatch = useDispatch()
     const { audioRef } = useSelector(state => ({
         audioRef: state.audio.audioRef,
     }))
     const { item } = props
+
+    // 进入歌单详情
+    const toSongDetail = () => {
+        history.push(`/findmusic/playlist?id=${item.id}`)
+    }
 
     const [maskFlag, setFlag] = useState(false)
     const getListAndPlay = useCallback((e) => {
@@ -34,10 +41,13 @@ const Cover = (props) => {
         })
     }, [dispatch, audioRef, item])
 
+    // 因为数据格式不同 判断封面路径
+    const bgUrl = item.picUrl ? item.picUrl : item.coverImgUrl
+
     return (
-        <div className={styles.coverContainer}>
+        <div onClick={toSongDetail} className={styles.coverContainer}>
             <div className={styles.coverImg}>
-                <img src={item.picUrl + '?param=140y140'} />
+                <img src={bgUrl + '?param=140y140'} />
                 <div className={styles.imgFooter}>
                     <div className={styles.footerLeft}>
                         <div className={styles.listenIcon}></div>
