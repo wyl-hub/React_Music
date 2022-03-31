@@ -141,6 +141,7 @@ const Audio = () => {
                         }
                     </div>
                     <div onClick={() => dispatch(setPlayListMask(!playListMask))} className={styles.list}></div>
+                    <div className={styles.listNum}>{playList.length}</div>
                 </div>
             </div>
             {/* lock */}

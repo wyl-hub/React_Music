@@ -1,0 +1,1 @@
+export const GET_RANKDETAIL = 'GET_RANKDETAIL'

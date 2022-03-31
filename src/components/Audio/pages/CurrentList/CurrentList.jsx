@@ -114,10 +114,12 @@ const Currentlist = (props) => {
                                 onMouseLeave={moveOut}
                                 onClick={playNewMusic(dispatch, audioRef, item)}
                                 key={item.id}
-                                className={styles.songItem}
+                                className={`${styles.songItem} ${currentSong.id === item.id ? styles.active : ''}`}
                             >
                                 <div className={styles.itemLeft}>
-                                    <div className={styles.itemIcon}></div>
+                                    {
+                                        currentSong.id === item.id && <div className={styles.itemIcon}></div>
+                                    }
                                     <div className={styles.songName}>{item.name}</div>
                                 </div>
                                 <div className={styles.itemRight}>

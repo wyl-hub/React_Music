@@ -39,6 +39,10 @@ const Rerank = () => {
         history.push(`/findmusic/player?id=${aim.id}`)
     }, [rankList])
 
+    // 进入排行详情
+    const toRankDetail = item => {
+        history.push(`/findmusic/Rank?id=${item.playlist.id}`)
+    }
     return (
         <div>
             <Theamheader title={'榜单'} />
@@ -50,13 +54,13 @@ const Rerank = () => {
                         <div key={item.playlist.createTime} className={styles.rankItem}>
                             <div className={styles.itemTop}>
                                 <div>
-                                    <img src={item.playlist.coverImgUrl} />
+                                    <img onClick={() => toRankDetail(item)} src={item.playlist.coverImgUrl} />
                                 </div>
                                 <div className={styles.tioRight}>
-                                    <div className={styles.rankTitle}>{item.playlist.name}</div>
+                                    <div onClick={() => toRankDetail(item)} className={styles.rankTitle}>{item.playlist.name}</div>
                                     <div className={styles.rightIcon}>
-                                        <div className={styles.play}></div>
-                                        <div className={styles.add}></div>
+                                        {/* <div className={styles.play}></div>
+                                        <div className={styles.add}></div> */}
                                     </div>
                                 </div>
                             </div>
@@ -79,16 +83,16 @@ const Rerank = () => {
                                             {
                                                 pointerArr[0] === index && pointerArr[1] === ind && (
                                                     <div className={styles.itemRight}>
-                                                        <div className={`${styles.itemIcon} ${styles.itemPlay}`}></div>
+                                                        {/* <div className={`${styles.itemIcon} ${styles.itemPlay}`}></div>
                                                         <div className={`${styles.itemIcon} ${styles.itemAdd}`}></div>
-                                                        <div className={`${styles.itemIcon} ${styles.itemFloder}`}></div>
+                                                        <div className={`${styles.itemIcon} ${styles.itemFloder}`}></div> */}
                                                     </div>
                                                 )
                                             }
                                         </div>
                                     ))
                                 }
-                                <div className={styles.contentFooter}>
+                                <div onClick={() => toRankDetail(item)} className={styles.contentFooter}>
                                     查看全部→
                                 </div>
                             </div>

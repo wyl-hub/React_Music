@@ -2,9 +2,9 @@ import React from 'react';
 
 const Attention = () => {
     return (
-        <div>
+        <h2>
             关注
-        </div>
+        </h2>
     );
 }
 

@@ -2,9 +2,9 @@ import React from 'react';
 
 const Mymusic = () => {
     return (
-        <div>
+        <h2>
             我的音乐
-        </div>
+        </h2>
     );
 }
 

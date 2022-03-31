@@ -106,6 +106,16 @@
                 }
                 .itemLeft {
                     display: flex;
+                    align-items: center;
+                    position: relative;
+                    .itemIcon {
+                        background: url('~@/asset/playlist.png') no-repeat;
+                        width: 10px;
+                        height: 13px;
+                        background-position: -182px 0;
+                        position: absolute;
+                        left: -15px;
+                    }
                     .songName {
                         max-width: 100px;
                         white-space: nowrap;
@@ -146,6 +156,10 @@
                         }
                     }
                 }
+            }
+            .active {
+                color: white;
+                background-color: rgba(0, 0, 0, .7);
             }
         }
         .lycContainer {
