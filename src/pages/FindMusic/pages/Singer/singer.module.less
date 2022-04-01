@@ -1,0 +1,99 @@
+.container {
+    width: 980px;
+    margin: auto;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #d3d3d3;
+    .info {
+        width: 980px;
+        height: 400px;
+    }
+    .songList {
+        .title {
+            border-bottom: 1px solid #C20C0C;
+            font-size: 22px;
+            font-weight: 700;
+        }
+        .tableBox {
+            width: fit-content;
+            margin: auto;
+            border: 1px solid #ccc;
+            margin-top: 20px;
+            .th {
+                display: flex;
+                background-color: #F8F8F8;
+                height: 35px;
+                line-height: 35px;
+                align-items: center;
+                border-bottom: 1px solid #CCCCCC;
+                div {
+                    height: 100%;
+                    padding-left: 15px;
+                    border-left: 1px solid #ccc;
+                }
+                & > div:nth-child(1) {
+                    border-left: none;
+                }
+            }
+            .tb {
+                display: flex;
+                background-color: #F8F8F8;
+                height: 35px;
+                line-height: 35px;
+                align-items: center;
+                & > div {
+                    height: 100%;
+                    padding-left: 15px;
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                    white-space: nowrap;
+                }
+                .songName:hover {
+                    cursor: pointer;
+                    text-decoration: underline;
+                }
+                &:nth-child(2n) {
+                    background-color: #F7F7F7;
+                }
+                &:nth-child(2n + 1) {
+                    background-color: #FFFFFF;
+                }
+            }
+            .tIcon {
+                width: 74px;
+                display: flex;
+                align-items: center;
+                .index {
+                    width: 20px;
+                }
+                .icon {
+                    margin-left: 7px;
+                    cursor: pointer;
+                    display: inline-block;
+                    background: url('~@/asset/table.png') no-repeat;
+                    background-position: 0 -103px;
+                    width: 17px;
+                    height: 17px;
+                    &:hover {
+                        background-position: 0 -128px;
+                    }
+                }
+                .activeIcon {
+                    background-position: -20px -128px;
+                }
+            }
+            .songName {
+                width: 235px;
+            }
+            .songTime {
+                width: 111px;
+            }
+            .author {
+                width: 90px;
+            }
+            .album {
+                width: 127px;
+            }
+        }
+    }
+}

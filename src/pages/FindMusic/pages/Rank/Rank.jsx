@@ -19,6 +19,7 @@ const Rank = () => {
   const dispatch = useDispatch()
   useEffect(() => {
     if (id) dispatch(getRankDetailAction(id))
+    else dispatch(getRankDetailAction(3779629))
     return () => {
       // 清空当前 store中数据 避免下次进入该页面展示之前的数据
       dispatch(cleanCurrentDetail())

@@ -1,7 +1,7 @@
 import React, { memo, useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Carousel } from 'antd';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useHistory } from 'react-router-dom';
 import { getSongDetail } from './store/actions'
 import { playNewMusic } from '@/components/Audio/hooks/common'
 import { changePlayStatus, setCurrentSong, addPlayList } from '@/components/Audio/store/actions'
@@ -38,6 +38,12 @@ const Player = () => {
     const changFlag = useCallback(() => {
         setFlag(!showFlag)
     }, [showFlag])
+
+    // 前往mv页面
+    const history = useHistory()
+    const toMv = () => {
+        history.push(`/findmusic/Playmv?id=${songDetail.mv}&name=${songDetail.name}`)
+    }
     return (
         <div className={styles.container}>
             <div className={styles.musicImg}>
@@ -48,6 +54,9 @@ const Player = () => {
                 <h2>{songDetail.name}</h2>
                 <div>歌手：{songDetail.ar && songDetail.ar[0].name}</div>
                 <button onClick={playNewMusic(dispatch, audioRef, songDetail)} className={styles.playBtn}>播放</button>
+                {
+                    songDetail.mv && <button onClick={toMv} className={styles.playBtn}>播放mv</button>
+                }
                 {/* 歌词 */}
                 <div style={{height: showFlag ? 'fit-content' : '300px'}} className={styles.lyricBox}>
                     {

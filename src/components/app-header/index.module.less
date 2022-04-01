@@ -6,6 +6,7 @@
     justify-content: center;
     border-bottom: 5px solid #C20C0C;
     box-sizing: content-box;
+    align-items: center;
 }
 
 .logo {
@@ -36,4 +37,46 @@
 
 .navLink:hover {
     background-color: #000;
+}
+
+.search {
+    width: 200px;
+    margin-left: 150px;
+    position: relative;
+    .searchResult {
+        width: 200px;
+        margin-top: 5px;
+        border-radius: 10px;
+        z-index: 99;
+        min-height: 100px;
+        background-color: #fff;
+        position: absolute;
+        padding: 10px;
+        .border {
+            height: 1px;
+            width: 100%;
+            background-color: #ccc;
+        }
+        .resultBox {
+            display: flex;
+            margin-top: 5px;
+            .resultTitle {
+                width: 50px;
+            }
+            .result {
+                width: 110px;
+                padding-left: 20px;
+                .overflow {
+                    width: 110px;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                    cursor: pointer;
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
+            }
+        }
+    }
 }

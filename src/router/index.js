@@ -9,9 +9,11 @@ import Rank from '../pages/FindMusic/pages/Rank/Rank'
 import SongList from '../pages/FindMusic/pages/SongList/SongList'
 import Station from '../pages/FindMusic/pages/Station/Station'
 import Singer from '../pages/FindMusic/pages/Singer/Singer'
+import SingerList from '../pages/FindMusic/pages/SingerList/SingerList'
 import Player from '../pages/FindMusic/pages/Player/Player'
 import PlayList from '../pages/FindMusic/pages/PlayList/PlayList'
 import Album from '../pages/FindMusic/pages/Album/Album'
+import Playmv from '../pages/FindMusic/pages/PlayMv/PlayMv'
 
 const routes = [
     {
@@ -55,9 +57,13 @@ const routes = [
             },
             {
                 path: '/findmusic/Singer',
-                exact: true,
                 component: Singer
             },
+            {
+                path: '/findmusic/SingerList',
+                component: SingerList
+            },
+
             {
                 path: '/findmusic/player',
                 component: Player
@@ -69,7 +75,12 @@ const routes = [
             {
                 path: '/findmusic/album',
                 component: Album
+            },
+            {
+                path: '/findmusic/Playmv',
+                component: Playmv
             }
+            
         ]
     },
     {
@@ -82,7 +93,7 @@ const routes = [
         exact: true,
         component: Attention
     },
-    
+
 ]
 
 

@@ -18,11 +18,11 @@ const Findmusic = (props) => {
                 <NavLink className={styles.navLink} to="/findmusic/SongList">
                     <span className={`${styles.navText} ${pathname.split('/')[2] === 'SongList' ? styles.active : ''}`}>歌单</span>
                 </NavLink>
-                <NavLink className={styles.navLink} to="/findmusic/Station">
+                {/* <NavLink className={styles.navLink} to="/findmusic/Station">
                     <span className={`${styles.navText} ${pathname.split('/')[2] === 'Station' ? styles.active : ''}`}>主播电台</span>
-                </NavLink>
-                <NavLink className={styles.navLink} to="/findmusic/Singer">
-                    <span className={`${styles.navText} ${pathname.split('/')[2] === 'Singer' ? styles.active : ''}`}>歌手</span>
+                </NavLink> */}
+                <NavLink className={styles.navLink} to="/findmusic/SingerList">
+                    <span className={`${styles.navText} ${pathname.split('/')[2] === 'SingerList' ? styles.active : ''}`}>歌手</span>
                 </NavLink>
                 <NavLink className={styles.navLink} to="/findmusic/AlbumList">
                     <span className={`${styles.navText} ${pathname.split('/')[2] === 'AlbumList' ? styles.active : ''}`}>新碟上架</span>

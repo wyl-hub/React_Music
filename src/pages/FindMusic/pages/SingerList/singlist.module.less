@@ -1,0 +1,24 @@
+.container {
+    width: 980px;
+    margin: auto;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #d3d3d3;
+    .listBox {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+        grid-row-gap: 20px;
+        justify-content: space-between;
+        .item {
+            width: 130px;
+            cursor: pointer;
+            img {
+                width: 130px;
+                height: 130px;
+            }
+            .name {
+                text-align: center;
+            }
+        }
+    }
+}

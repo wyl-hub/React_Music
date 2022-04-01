@@ -8,6 +8,8 @@ import album from '../pages/FindMusic/pages/Album/store'
 import songlist from '../pages/FindMusic/pages/SongList/store'
 import albumlist from '../pages/FindMusic/pages/AlbumList/store'
 import rank from '../pages/FindMusic/pages/Rank/store'
+import singer from '../pages/FindMusic/pages/Singer/store'
+import singlist from '../pages/FindMusic/pages/SingerList/store'
 
 const reducer = combineReducers({
   recommend,
@@ -17,7 +19,9 @@ const reducer = combineReducers({
   album,
   songlist,
   albumlist,
-  rank
+  rank,
+  singer,
+  singlist
 })
 
 export default reducer

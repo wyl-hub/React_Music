@@ -7,7 +7,9 @@ export const playMusic = (dispatch, audioDom, currentSong) => {
     return () => {
         if (JSON.stringify(currentSong) === '{}') return
         dispatch(changePlayStatus(true))
-        audioDom.current.play()
+        audioDom.current.play().catch(err => {
+            alert('要VIP 我这放不了')
+        })
     }
 }
 
@@ -40,19 +42,21 @@ export const playNewMusic = (dispatch, audioDom, newSong, songList = []) => {
         audioDom.current.src = url
         audioDom.current.load()
         setTimeout(() => {
-            audioDom.current.play()
+            audioDom.current.play().then(res => {
+                dispatch(changePlayStatus(true))
+                if (songList.length > 0) {
+                    dispatch(addPlayList(songList))
+                    getCurrentLrc(dispatch, songList[0].id)
+                    dispatch(setCurrentSong(songList[0]))
+                } else {
+                    dispatch(addPlayList([newSong]))
+                    getCurrentLrc(dispatch, newSong.id)
+                    dispatch(setCurrentSong(newSong))
+                }
+            }).catch(err => {
+                alert('要VIP 我这放不了')
+            })
         }, 300)
-        dispatch(changePlayStatus(true))
-
-        if (songList.length > 0) {
-            dispatch(addPlayList(songList))
-            getCurrentLrc(dispatch, songList[0].id)
-            dispatch(setCurrentSong(songList[0]))
-        } else {
-            dispatch(addPlayList([newSong]))
-            getCurrentLrc(dispatch, newSong.id)
-            dispatch(setCurrentSong(newSong))
-        }
     }
 }
 
@@ -63,20 +67,32 @@ export const removeMusic = (dispatch, playList, aimSong) => {
 }
 
 // 上一首
-export const changeMusic = (dispatch, audioDom, playList, currentSong, type) => {
+export const changeMusic = (dispatch, audioDom, playList, currentSong, type, rule = '') => {
     return () => {
         let aim = {}
         if (playList.length === 1) aim = currentSong
         else {
             playList.some((item, index) => {
                 if (item.id === currentSong.id) {
-                    if (type === 'last') {
-                        if (index === 0) aim = playList[playList.length - 1]
-                        else aim = playList[index - 1]
-                    }
-                    if (type === 'next') {
-                        if (index === playList.length - 1) aim = playList[0]
-                        else aim = playList[index + 1]
+                    // 单曲循环 随机播放
+                    if (rule && rule !== 'loop') {
+                        if (rule === 'singLoop') aim = currentSong
+                        if (rule === 'random') {
+                            let ind = index
+                            while (ind === index) {
+                                ind = Math.floor(Math.random() * (playList.length))
+                            }
+                            aim = playList[ind]
+                        }
+                    } else {
+                        if (type === 'last') {
+                            if (index === 0) aim = playList[playList.length - 1]
+                            else aim = playList[index - 1]
+                        }
+                        if (type === 'next') {
+                            if (index === playList.length - 1) aim = playList[0]
+                            else aim = playList[index + 1]
+                        }
                     }
                     return true
                 }

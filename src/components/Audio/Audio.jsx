@@ -8,6 +8,17 @@ import Currentlist from './pages/CurrentList/CurrentList'
 import styles from './audio.module.less'
 
 const Audio = () => {
+    // 播放规则
+    const playRule = ['singLoop', 'loop', 'random']
+    const [currentRule, setRule] = useState('loop')
+    // 切换播放规则
+    const changeRule = useCallback(type => {
+        if (type === playRule[0]) setRule(playRule[1])
+        if (type === playRule[1]) setRule(playRule[2])
+        if (type === playRule[2]) setRule(playRule[0])
+    }, [playRule])
+
+
     const audioRef = useRef()
     // 将audioDom 存入redux 在其他组件可以操作
     const dispatch = useDispatch()
@@ -30,17 +41,19 @@ const Audio = () => {
     const [temTime, setTemTime] = useState(false)
     const getCurrentTime = useCallback((e) => {
         setTime(e.target.currentTime * 1000)
-        if (currentSong.dt) {
-            if (e.target.currentTime * 1000 >= currentSong.dt) {
-                if (playList.length === 0) {
-                    dispatch(changePlayStatus(false))
-                    audioRef.current.pause()
+        if (currentSong.dt && e.target.currentTime * 1000 >= currentSong.dt) {
+            if (playList.length === 0) {
+                dispatch(changePlayStatus(false))
+                audioRef.current.pause()
+            } else {
+                if (currentRule === 'singLoop' || currentRule === 'random') {
+                    changeMusic(dispatch, audioRef, playList, currentSong, 'next', currentRule)()
                 } else {
                     changeMusic(dispatch, audioRef, playList, currentSong, 'next')()
                 }
             }
         }
-    }, [setTime, dispatch, currentSong, playList, audioRef, nextMusic])
+    }, [setTime, dispatch, currentSong, playList, audioRef, nextMusic, currentRule])
     // console.log('播放列表', playList)
     // console.log('当前播放音乐', currentSong)
     const duration = (currentSong.dt && dayjs(currentSong.dt).format('mm:ss')) || '00:00'
@@ -82,8 +95,8 @@ const Audio = () => {
     const pauseBtn = pauseMusic(dispatch, audioRef, currentSong)
 
     // 上一首 下一首
-    const lastMusic = useCallback(changeMusic(dispatch, audioRef, playList, currentSong, 'last'), [dispatch, audioRef, playList, currentSong])
-    const nextMusic = useCallback(changeMusic(dispatch, audioRef, playList, currentSong, 'next'), [dispatch, audioRef, playList, currentSong])
+    const lastMusic = useCallback(changeMusic(dispatch, audioRef, playList, currentSong, 'last', currentRule), [dispatch, audioRef, playList, currentSong, currentRule])
+    const nextMusic = useCallback(changeMusic(dispatch, audioRef, playList, currentSong, 'next', currentRule), [dispatch, audioRef, playList, currentSong, currentRule])
 
     // console.log(currentLyc)
     return (
@@ -140,6 +153,31 @@ const Audio = () => {
                             </div>
                         }
                     </div>
+                    {/* 播放规则 单曲 随机 顺序 */}
+                    {
+                        currentRule === 'singLoop' && <div
+                            title='单曲循环'
+                            className={`${styles.playRule} ${styles.singLoop}`}
+                            onClick={() => changeRule('singLoop')}
+                        >
+                        </div>
+                    }
+                    {
+                        currentRule === 'loop' && <div
+                            title='循环'
+                            className={`${styles.playRule} ${styles.loop}`}
+                            onClick={() => changeRule('loop')}
+                        >
+                        </div>
+                    }
+                    {
+                        currentRule === 'random' && <div
+                            title='随机'
+                            className={`${styles.playRule} ${styles.random}`}
+                            onClick={() => changeRule('random')}
+                        >
+                        </div>
+                    }
                     <div onClick={() => dispatch(setPlayListMask(!playListMask))} className={styles.list}></div>
                     <div className={styles.listNum}>{playList.length}</div>
                 </div>
