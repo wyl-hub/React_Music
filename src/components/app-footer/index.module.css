@@ -1,6 +1,7 @@
 .footerContainer {
   height: 172px;
-  width: 100%;
+  min-width: 1280px;
+  width: 100vw;
   border-top: 1px solid #d3d3d3;
   background-color: #f2f2f2;
   text-align: center;

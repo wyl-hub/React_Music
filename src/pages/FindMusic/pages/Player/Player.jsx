@@ -55,7 +55,7 @@ const Player = () => {
                 <div>歌手：{songDetail.ar && songDetail.ar[0].name}</div>
                 <button onClick={playNewMusic(dispatch, audioRef, songDetail)} className={styles.playBtn}>播放</button>
                 {
-                    songDetail.mv && <button onClick={toMv} className={styles.playBtn}>播放mv</button>
+                    songDetail.mv !== 0 && <button onClick={toMv} className={styles.playBtn}>播放mv</button>
                 }
                 {/* 歌词 */}
                 <div style={{height: showFlag ? 'fit-content' : '300px'}} className={styles.lyricBox}>

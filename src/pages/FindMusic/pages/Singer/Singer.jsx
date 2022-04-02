@@ -18,6 +18,9 @@ export default memo(function Singer() {
   const dispatch = useDispatch()
   useEffect(() => {
     if (id) dispatch(getSingerDetailAction(id))
+    return () => {
+      dispatch(getSingerDetailAction())
+    }
   }, [dispatch]);
 
   // 获取歌手详情以及热门歌曲
